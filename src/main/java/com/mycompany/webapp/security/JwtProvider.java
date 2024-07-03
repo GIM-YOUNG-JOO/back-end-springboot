@@ -1,12 +1,10 @@
 package com.mycompany.webapp.security;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -39,7 +37,7 @@ public class JwtProvider {
 	}
 
 	// AccessToken 생성
-	public String createAccessToken(String userId, String string) {
+	public String createAccessToken(String userId, String authority) {
 		String token = null;
 		try {
 			JwtBuilder builder = Jwts.builder();
@@ -48,7 +46,7 @@ public class JwtProvider {
 
 			// payload 설정 - 이메일 추가한다면 매개변수 추가하고 claim 메소드 이용
 			builder.subject(userId);
-			builder.claim("authority", string);
+			builder.claim("authority", authority);
 			builder.expiration(new Date(new Date().getTime() + accessTokenDuration));
 
 			// signature 설정

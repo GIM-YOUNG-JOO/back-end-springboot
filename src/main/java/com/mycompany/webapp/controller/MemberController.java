@@ -44,7 +44,7 @@ public class MemberController {
 		boolean checkResult = passwordEncoder.matches(mpassword, userDetails.getMember().getMpassword());
 		//Spring Security 인증 처리
 		if(checkResult == true) {
-			Authentication authentication = new  UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+			Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 		//응답 생성
